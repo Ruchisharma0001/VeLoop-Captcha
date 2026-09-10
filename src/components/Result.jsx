@@ -5,7 +5,7 @@ function Result({ correct, reward, onClaim, onNoThanks }) {
     <motion.section
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex min-h-[65vh] items-center justify-center px-4">
+      className="flex min-h-screen w-full items-center justify-center bg-[#070719] px-4">
 
       <div className="w-full max-w-lg text-center">
 

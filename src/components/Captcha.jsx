@@ -20,8 +20,6 @@ function Captcha({ coin, code, options, onSelect, onRefresh }) {
 
     return (
         <div className="min-h-screen w-full pt-2 sm:pt-6 pb-5 overflow-x-hidden">
-            <div className="fixed top-2 right-5 lg:hidden z-40 flex items-center gap-2 px-4 py-1.5 rounded-xl bg-white text-purple-900 font-bold shadow-lg text-sm">💎 {coin}</div>
-
             <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-8 px-4 pt-5 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:gap-10 lg:px-8">
                 <div className="w-full text-center pt-10 lg:w-1/2 lg:text-left">
                     <div className="flex justify-center lg:justify-start">

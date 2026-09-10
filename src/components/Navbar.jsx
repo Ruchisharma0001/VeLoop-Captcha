@@ -21,20 +21,19 @@ function Navbar({ coin = 0 }) {
         </div>
 
         <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2 rounded-xl border border-white/10 bg-white/5 px-2.5 sm:px-4 py-1.5 sm:py-2">
+            <Gem size={14} className="text-yellow-400 sm:w-4 sm:h-4" />
 
-          <div className="hidden items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 sm:flex">
-            <Gem size={16} className="text-yellow-400" />
-
-            <span className="font-semibold">
+            <span className="font-semibold text-sm sm:text-base">
               {coin}
             </span>
 
-            <span className="text-xs text-white/40">
+            <span className="text-[10px] sm:text-xs text-white/40">
               Gems
             </span>
           </div>
 
-          <button className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <button className="rounded-xl border border-white/10 bg-white/5 p-2.5 sm:p-3">
             <Bell size={18} />
           </button>
 
@@ -44,4 +43,5 @@ function Navbar({ coin = 0 }) {
     </header>
   );
 }
+
 export default Navbar;
