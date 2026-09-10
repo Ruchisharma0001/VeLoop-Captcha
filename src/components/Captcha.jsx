@@ -25,7 +25,7 @@ function Captcha({ coin, code, options, onSelect, onRefresh }) {
                     <div className="flex justify-center lg:justify-start">
                         <img
                             style={{ WebkitMaskImage: "radial-gradient(circle, black 10%, transparent 40%)", mixBlendMode: "lighten", width: "150px", height: "auto", maxWidth: "100%" }}
-                            className="sm:w-200px ml-30"
+                            className="sm:w-120px md:ml-30"
                             src={GemImage}
                             alt="Images"
                         />

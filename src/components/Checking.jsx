@@ -5,7 +5,7 @@ function Checking() {
     <motion.div
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="flex min-h-[65vh] items-center justify-center px-4"  >
+      className="flex min-h-screen items-center justify-center px-4"  >
 
       <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0c0c25] p-6 sm:p-8 text-center">
 

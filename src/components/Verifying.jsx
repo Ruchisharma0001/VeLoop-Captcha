@@ -4,7 +4,7 @@ function Verify() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex min-h-[65vh] items-center justify-center">
+      className="flex min-h-screen w-full items-center justify-center bg-[#070719] px-4">
 
       <div className="text-center">
 
