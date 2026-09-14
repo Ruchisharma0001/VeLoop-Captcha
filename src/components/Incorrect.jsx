@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import IncorrectImg from "./incorrect.png";
+import IncorrectImg from "./incorrect.avif";
 import PhoneScreen from "./PhoneScreen";
 import { ShieldCheck } from "lucide-react";
 

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import PhoneScreen from "./PhoneScreen";
-import CorrectImg from "./correct.png";
+import CorrectImg from "./correct.avif";
 import { ShieldCheck } from "lucide-react";
 
 function Success({ coin, prevBalance, newBalance, onAddToBalance, onMaybeLater }) {

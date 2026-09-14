@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
 import PhoneScreen from "./PhoneScreen";
-import LockImage from "./Lock.png";
+import LockImage from "./Lock.avif";
 
 function Checking({ coin }) {
   return (
