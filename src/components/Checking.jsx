@@ -1,41 +1,45 @@
 import { motion } from "framer-motion";
 import { ShieldCheck } from "lucide-react";
-function Checking() {
+import PhoneScreen from "./PhoneScreen";
+import LockImage from "./Lock.png";
+
+function Checking({ coin }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="flex min-h-screen items-center justify-center px-4"  >
+    <PhoneScreen coin={coin}>
+      <div className="flex flex-col items-center text-center py-6">
+        <motion.img
+          src={LockImage}
+          alt="Verifying"
+          style={{ mixBlendMode: "lighten" }}
+          animate={{ scale: [1.5, 1.0, 1.5] }}
+          transition={{ duration: 1.2, repeat: Infinity }}
+          className="h-32 w-32 object-contain"
+        />
 
-      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#0c0c25] p-6 sm:p-8 text-center">
-
-        <motion.div
-          animate={{ scale: [1, 1.08, 1] }}
-          transition={{ duration: 1, repeat: Infinity }}
-          className="mx-auto mb-6 flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-linear-to-br from-cyan-400/20 to-purple-500/20">
-          <ShieldCheck size={36} className="text-cyan-400 sm:hidden" />
-          <ShieldCheck size={40} className="hidden sm:block text-cyan-400" />
-        </motion.div>
-
-        <h2 className="text-xl sm:text-2xl font-bold">
-          Checking your answer
-        </h2>
-
-        <p className="mt-2 text-sm text-white/40">
-          Verifying your challenge securely
+        <h2 className="mt-6 text-xl font-bold text-white">Verifying...</h2>
+        <p className="mt-1 text-sm text-white/70">
+          Please wait while we check your answer.
         </p>
 
-        <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-white/10">
+        <div className="mt-6 w-full h-2 rounded-full bg-white/10 overflow-hidden">
           <motion.div
-            initial={{ x: "-100%" }}
-            animate={{ x: "100%" }}
-            transition={{ duration: 1.1, repeat: Infinity }}
-            className="h-full w-1/2 bg-linear-to-r from-cyan-400 to-purple-500" />
+            initial={{ width: "10%" }}
+            animate={{ width: ["10%", "60%", "85%", "60%"] }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="h-full rounded-full bg-linear-to-r from-purple-600 via-purple-500 to-purple-700"
+          />
         </div>
 
+        <div className="mt-6 w-full flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.06)] bg-white/[0.03] px-3 py-2.5 text-xs text-white">
+          <ShieldCheck size={14} className="text-white shrink-0" />
+          Do not close this screen while verification is in progress.
+        </div>
       </div>
-
-    </motion.div>
+    </PhoneScreen>
   );
 }
 

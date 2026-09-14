@@ -3,17 +3,14 @@ import Captcha from "./components/Captcha";
 import { generateChallenge } from "./components/CaptchaLogic.js";
 import useCoin from "./components/hooks/useCoin.jsx";
 import WelcomeBonus from "./components/WelcomeBonus.jsx";
-import Navbar from "./components/Navbar.jsx";
 import Checking from "./components/Checking.jsx";
-import Result from "./components/Result.jsx";
-import Bottom from "./components/Bottom.jsx";
+import Success from "./components/Success.jsx";
+import Incorrect from "./components/Incorrect.jsx";
 
 function App() {
   const [challenge, setChallenge] = useState(generateChallenge());
   const { coin, addCorrectReward, addWrongReward, addWelcomeBonus } = useCoin();
   const [showWelcome, setShowWelcome] = useState(false);
-
- 
   const [phase, setPhase] = useState("captcha");
   const [lastResult, setLastResult] = useState(null);
 
@@ -30,13 +27,11 @@ function App() {
     setShowWelcome(false);
   };
 
-
   const handleSelect = (option) => {
     const isCorrect = option === challenge.code;
     setLastResult({ correct: isCorrect, reward: isCorrect ? 1 : 0.5 });
     setPhase("checking");
   };
-
 
   useEffect(() => {
     if (phase === "checking") {
@@ -46,20 +41,34 @@ function App() {
   }, [phase]);
 
   const handleClaimReward = () => {
-    if (lastResult?.correct) {
-      addCorrectReward();
-    } else {
-      addWrongReward();
-    }
+    addCorrectReward();
     setLastResult(null);
     setChallenge(generateChallenge());
     setPhase("captcha");
   };
 
-  const handleSkipReward = () => {
+  const handleMaybeLater = () => {
     setLastResult(null);
     setChallenge(generateChallenge());
     setPhase("captcha");
+  };
+
+  const handleTryAgain = () => {
+    setLastResult(null);
+    setPhase("captcha");
+  };
+
+  const handleGetNewCode = () => {
+    setLastResult(null);
+    setChallenge(generateChallenge());
+    setPhase("captcha");
+  };
+
+  const handleBack = () => {
+    if (phase === "checking" || phase === "result") {
+      setLastResult(null);
+      setPhase("captcha");
+    }
   };
 
   const handleRefresh = () => {
@@ -67,34 +76,44 @@ function App() {
   };
 
   return (
-    <div className="md:min-h-screen bg-linear-90 from-[#1c0f2c] via-[#380e62] to-[#1f0d30] text-white flex flex-col items-center ">
-      <Navbar coin={coin} />
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#0a0e27] via-[#0d1229] to-[#0a0e27] text-white flex flex-col items-center">
+      {showWelcome && <WelcomeBonus onClaim={handleClaimWelcome} />}
 
-      <div className="w-full">
-        {showWelcome && <WelcomeBonus onClaim={handleClaimWelcome} />}
+      {phase === "captcha" && (
+        <Captcha
+          key={lastResult ? "retry" : "fresh"}
+          code={challenge.code}
+          options={challenge.options}
+          coin={coin}
+          onSelect={handleSelect}
+          onRefresh={handleRefresh}
+          onBack={handleBack}
+        />
+      )}
 
-        {phase === "captcha" && (
-          <Captcha
-            code={challenge.code}
-            options={challenge.options}
-            coin={coin}
-            onSelect={handleSelect}
-            onRefresh={handleRefresh}/>
-        )}
+      {phase === "checking" && <Checking coin={coin} onBack={handleBack} />}
 
-        {phase === "checking" && <Checking />}
+      {phase === "result" && lastResult?.correct && (
+        <Success
+          coin={coin}
+          prevBalance={coin}
+          newBalance={coin + lastResult.reward}
+          onAddToBalance={handleClaimReward}
+          onMaybeLater={handleMaybeLater}
+          onBack={handleBack}
+        />
+      )}
 
-        {phase === "result" && lastResult && (
-          <Result
-            correct={lastResult.correct}
-            reward={lastResult.reward}
-            onClaim={handleClaimReward}
-            onNoThanks={handleSkipReward}/>
-        )}
-
-        <Bottom />
-      </div>
+      {phase === "result" && lastResult && !lastResult.correct && (
+        <Incorrect
+          coin={coin}
+          onTryAgain={handleTryAgain}
+          onGetNewCode={handleGetNewCode}
+          onBack={handleBack}
+        />
+      )}
     </div>
   );
 }
+
 export default App;
